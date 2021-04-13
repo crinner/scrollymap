@@ -1,0 +1,456 @@
+﻿<!doctype html>
+
+<html>
+
+  <!--
+    Scrolly Map by Dr. Claus Rinner
+    Data received from Dr. Ann Marie Murnaghan & team
+  -->
+
+<head>
+  <meta charset=utf-8 />
+
+  <!-- For responsive design for mobile devices -->
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+  <title>City Picture Book Locations</title>
+
+  <!-- Import Leaflet libraries -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+  <script src="leaflet-hash.js"></script>
+
+  <!-- Import scroll library (JQuery version) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="jquery.scrollstory.js"></script>
+
+  <style>
+
+    /* Use full browser page height and width */
+    html, body, #containerDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    #mapDiv {
+      position: fixed;    /* important, triggers on scrollDiv won't work otherwise */
+      top: 0px;
+      height: 100%;
+      left: 0px;
+      width: 100%;
+      z-index: 401;
+    }
+
+    /* Place semi-transparent scroll text over map on right side of page */
+    #scrollDiv {
+      position: absolute;
+      top: 0px;
+/*      height: 100%;   /* do not set to 100%, triggers won't work */
+      overflow: auto;
+      right: 0px;
+      width: 360px;
+      padding: 0 15px;
+      color: white;
+      font-family: sans-serif;
+      background: rgba(0,0,0,0.5);
+      z-index: 404;
+    }
+
+    /* Responsive design settings for mobile devices */
+    /* To fix scroll panel at bottom, additional containerDiv was required. */
+    /* The scroll triggers still don't work; thus added the 'reload' icon for manual fly-to */
+    @media only screen and (max-width: 768px) {
+      #mapDiv {
+        position: fixed;    /* important, triggers on scrollDiv won't work otherwise */
+        top: 0px;
+        height: 100%;
+        left: 0px;
+        width: 100%;
+        z-index: 401;
+      }
+      #containerDiv {
+        position: fixed;    /* important, triggers on scrollDiv won't work otherwise */
+        left: 0px; 
+        width: 100%;
+        bottom: 0px;
+        height: 40%;
+        overflow: auto;
+        z-index: 402;
+      }
+      #scrollDiv {
+        position: absolute;
+        left: 0px;
+        width: 100%;
+        top: 0px;     /* relative to container */
+        height: 100%;
+        padding: 0 15px;
+        color: white;
+        font-family: sans-serif;
+        background: rgba(0,0,0,0.5);
+        overflow: auto;
+        z-index: 404;
+      }
+    }
+
+    /* (un)visited links: don't underline b/c it conflicts with the navigation vees and wedges */
+    a:link, a:visited {
+      color: lightgrey;
+      text-decoration: none;
+    }
+
+    /* mouse over and active links */
+    a:hover, a:active {
+      color: grey;
+      text-decoration: none;  // don't underline links
+    }
+
+  </style>
+  
+  <!-- Firefox-Leaflet work-around for "will-change" issue, https://github.com/flibbertigibbet/echo-locator/commit/e4b51bc053f3deba4aedb6cc431975e94af3fd6c -->
+  <style>
+    .leaflet-fade-anim .leaflet-tile .leaflet-zoom-anim .leaflet-zoom-animated {
+      will-change: unset;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Map canvas -->
+  <div id='mapDiv'></div>
+
+  <!-- Help with CSS positioning... -->
+  <div id='containerDiv'>
+
+  <!-- Semi-transparent scroll overlay panel -->
+  <!-- Tip for scrollable sub-div style found at https://stackoverflow.com/questions/9811465/scrollable-div-inside-container#9811485 -->
+  <!-- This section includes text, images, references -->
+  <div id='scrollDiv'>
+
+    <!-- class trigger and data attributes used by ScrollStory -->
+    <div class='trigger' id='location1' data-x='48' data-y='24' data-z='2'>
+      <!-- keep a bit of space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+      <h2>1. Covello, Paul. Toronto ABC. Harper Collins, 2014</h2>
+(credit Emily Smith)
+
+<p>Summary: Paul Covello’s Toronto ABC takes very young readers on a tour of Toronto’s most notable attractions and neighborhoods. The alphabet guides the exploration of places such as the AGO, Distillery District, Lake Ontario, Kensington Market and more.</p>
+
+<p>Location Features: AGO, Casa Loma, Distillery District, Eaton Centre, Fort York, Allan Gardens, the Junction, Kensington Market, Nathan Phlips Square, Old City Hall, Pearson International Airport, Queen’s Park, Royal Ontario Museum, CN Tower, Waterfront, The Ex, Yonge and Dundas Square</p>
+
+      <p>&nbsp;</p>
+
+      <!-- within-panel navigation using HTML anchors -->
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1"> &wedge; </a>|<a onclick="map.flyTo([24, 48], 2)"> &circlearrowright; </a>|<a href="#location1d"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <!-- more space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+    </div>
+
+    <div class='trigger' id='location1d' data-x='-79.35809984539931' data-y='43.650945703313894' data-z='17'>
+      <p>&nbsp;</p>
+
+      <h3>Distillery District</h3>
+      <img width='240' src="1d.png" />
+
+      <p>&nbsp;</p>
+
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1"> &wedge; </a>|<a onclick="map.flyTo([43.650945703313894, -79.35809984539931], 17)"> &circlearrowright; </a>|<a href="#location1g"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <p>&nbsp;</p>
+    </div>
+    
+    <div class='trigger' id='location1g' data-x='-79.37408374283689' data-y='43.6621076705541' data-z='17'>
+      <p>&nbsp;</p>
+
+      <h3>Allan Garden Palm House</h3>
+      <img width='240' src="1g.png" />
+
+      <p>&nbsp;</p>
+
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1d"> &wedge; </a>|<a onclick="map.flyTo([43.6621076705541, -79.37408374283689], 17)"> &circlearrowright; </a>|<a href="#location1j"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <p>&nbsp;</p>
+    </div>
+    
+    <div class='trigger' id='location1j' data-x='-79.4513942633697' data-y='43.660961000477016' data-z='17'>
+      <p>&nbsp;</p>
+
+      <h3>The Junction Neighbourhood (Wallace Avenue Footbridge)</h3>
+      <img width='240' src="1j.png" />
+
+      <p>&nbsp;</p>
+
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1g"> &wedge; </a>|<a onclick="map.flyTo([43.660961000477016, -79.4513942633697], 17)"> &circlearrowright; </a>|<a href="#location1k"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <p>&nbsp;</p>
+    </div>
+    
+    <div class='trigger' id='location1k' data-x='-79.40018060187069' data-y='43.654918040502956' data-z='17'>
+      <p>&nbsp;</p>
+
+      <h3>Kensington Market Neighbourhood</h3>
+      <img width='240' src="1k.png" />
+
+      <p>&nbsp;</p>
+
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1j"> &wedge; </a>|<a onclick="map.flyTo([43.654918040502956, -79.40018060187069], 17)"> &circlearrowright; </a>|<a href="#location1n"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <p>&nbsp;</p>
+    </div>
+    
+    <div class='trigger' id='location1n' data-x='-79.38324204044673' data-y='43.652916471966336' data-z='17'>
+      <p>&nbsp;</p>
+
+      <h3>Nathan Phillips Square</h3>
+      <img width='240' src="1n.png" />
+
+      <p>&nbsp;</p>
+
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1k"> &wedge; </a>|<a onclick="map.flyTo([43.652916471966336, -79.38324204044673], 17)"> &circlearrowright; </a>|<a href="#location1o"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <p>&nbsp;</p>
+    </div>
+    
+    <div class='trigger' id='location1o' data-x='-79.38158685579324' data-y='43.65269055906366' data-z='17'>
+      <p>&nbsp;</p>
+
+      <h3>Old City Hall, Toronto</h3>
+      <img width='240' src="1o.png" />
+
+      <p>&nbsp;</p>
+
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1n"> &wedge; </a>|<a onclick="map.flyTo([43.65269055906366, -79.38158685579324], 17)"> &circlearrowright; </a>|<a href="#location2"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <p>&nbsp;</p>
+    </div>
+
+    <!-- class trigger and data attributes used by ScrollStory -->
+    <div class='trigger' id='location2' data-x='-79.39470200001394' data-y='43.66764759291266' data-z='17'>
+
+      <!-- keep a bit of space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+      <h2>2. Fine, Esther Sokolov. I'm A Child of the City. Kids Can Press, 1973</h2>
+
+(credit Quentin Stuckey)
+
+<p>Summary: A rare children's text from the Osborne Collection of Early Children's Books, writer/educator Esther Sokolov Fine captures the subtle pleasures of city life from the perspective of a young girl. Her simple ink illustrations portray the delight in waiting for the streetcar, visiting the Royal Ontario Museum, yelling to friends on a busy street and even sitting on the curb, as if distilling leisurely joy/appreciation from city activities that we often regard as too hectic or mundane. The young girl couldn't imagine being anything other than "a child of the city."</p>
+
+<p>Location Features: Royal Ontario Museum</p>
+      <img width='240' src="2.png" />
+
+      <p>&nbsp;</p>
+
+      <!-- within-panel navigation using HTML anchors -->
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1o"> &wedge; </a>|<a onclick="map.flyTo([43.66764759291266, -79.39470200001394], 17)"> &circlearrowright; </a>|<a href="#location3"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <!-- more space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+    </div>
+
+    <!-- class trigger and data attributes used by ScrollStory -->
+    <div class='trigger' id='location3' data-x='-79.40935807117697' data-y='43.67800604136595' data-z='17'>
+
+      <!-- keep a bit of space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+      <h2>3. Lee, Dennis. The Cat and the Wizard. Illustrated by Gillian Johnson, Harper Collins, 2001</h2>
+
+(credit Emily Smith)
+
+<p>Summary: This story follows two lonely characters, a cat and a wizard. After a chance encounter in a laundromat, the homeless wizard and black cat share a wonderful evening in Casa Loma. They eat a delicious tuna dinner and the wizard puts on a magic show.</p>
+
+<p>Location Features: Casa Loma</p>
+      <img width='240' src="3.png" />
+
+      <p>&nbsp;</p>
+
+      <!-- within-panel navigation using HTML anchors -->
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location2"> &wedge; </a>|<a onclick="map.flyTo([43.67800604136595, -79.40935807117697], 17)"> &circlearrowright; </a>|<a href="#location4"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <!-- more space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+    </div>
+
+    <!-- class trigger and data attributes used by ScrollStory -->
+    <div class='trigger' id='location4' data-x='-79.38167268658121' data-y='43.652682796349545' data-z='17'>
+
+      <!-- keep a bit of space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+      <h2>4. Munsch, Robert. Jonathan Cleaned Up – Then He Heard a Sound. Illustrated by Michael Martchenko, Annick Press, 1981</h2>
+
+(credit Emily Smith)
+
+<p>Summary: Just as Jonathan finishes tidying up his home, he hears a noise behind the wall. A train comes through his apartment and makes an unexpected stop in his living room, ruining all his cleaning efforts. The train conductor tells Jonathan that he should go to City Hall if he has a problem with the train stopping in his home. There he meets with the mayor and the man behind the computers which control the subway system. Michael Marchenko illustrates scenes of Toronto, including the exterior and interior of City Hall and TTC streetcars.</p>
+
+<p>Location Features: Old City Hall</p>
+      <img width='240' src="4.png" />
+
+      <p>&nbsp;</p>
+
+      <!-- within-panel navigation using HTML anchors -->
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location3"> &wedge; </a>|<a onclick="map.flyTo([43.652682796349545, -79.38167268658121], 17)"> &circlearrowright; </a>|<a href="#location5"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <!-- more space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+    </div>
+
+    <!-- class trigger and data attributes used by ScrollStory -->
+    <div class='trigger' id='location5' data-x='-70.7496690801711' data-y='43.08885789817081' data-z='17'>
+
+      <!-- keep a bit of space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+      <h2>5. Viva, Frank. Young Frank, Architect. Harry N. Abrams, 2013</h2>
+
+(credit Quentin Stuckey)
+
+<p>Summary: Part of a series of picture books focusing on precocious young people, Frank Viva’s Young Frank, Architect is a delightful story concerning Frank’s passion for building and designing everywhere he goes. He builds models utilizing household articles including popsicle sticks, books and paper, prompting his father to encourage his love of building design by showing him the city skyscrapers. Viva’s illustrated depiction of New York City is reminiscent of 1950’s-1960’s sharp, detailed city life, complete with suits, ties and hats.</p>
+
+<p>Location Features: Museum of Modern Art, New York City</p>
+      <img width='240' src="5.png" />
+
+      <p>&nbsp;</p>
+
+      <!-- within-panel navigation using HTML anchors -->
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location4"> &wedge; </a>|<a onclick="map.flyTo([43.08885789817081, -70.7496690801711], 17)"> &circlearrowright; </a>|<a href="#location6"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <!-- more space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+    </div>
+
+    <!-- class trigger and data attributes used by ScrollStory -->
+    <div class='trigger' id='location6' data-x='-73.97867360209554' data-y='40.75895960045721' data-z='17'>
+
+      <!-- keep a bit of space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+      <h2>6. Levine, Rhoda. Arthur. Illustrated by Everett Aison, New York Review Books, 1962</h2>
+
+(credit Quentin Stuckey)
+
+<p>Summary: In this vintage picture book, written by Rhoda Levine and illustrated by Everett Aison, a bird named Arthur is so immersed in the scenes of New York City that his fellow bird companions leave him behind as they fly south for the incoming winter. Arthur must fend for himself: taking shelter on a statue, being fed bread crumbs in the park and observing the changes in season based on the attire of New York city dwellers. Arthur succeeds in taking care of himself with the other birds returning and being shocked by his preservation. Aison’s illustrations are minimalist and crudely drawn, leaving plenty of white space which literally gives Arthur more space to roam around the page.</p>
+
+<p>Location Features: Rockefeller Center, New York City</p>
+      <img width='240' src="6.png" />
+
+      <p>&nbsp;</p>
+
+      <!-- within-panel navigation using HTML anchors -->
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location5"> &wedge; </a>|<a onclick="map.flyTo([40.75895960045721, -73.97867360209554], 17)"> &circlearrowright; </a>|<a href="#location6"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+
+      <!-- more space so that viewport is occupied by only one item at a time -->
+      <p>&nbsp;</p>
+
+    </div>
+
+  </div> <!-- end of scroll panel -->
+
+  </div> <!-- end of container -->
+
+  <!-- MAIN SCRIPT -->
+  <script>
+
+    // Create instance of Leaflet Map
+    var map = L.map('mapDiv', {
+      center: [24, 48], 
+      attributionControl: false, 
+      zoom: 2, 
+      zoomControl: false,   // set to false if you want to position the zoom controls elsewhere
+    }); 
+
+    // Activate URL hashing to dynamically add x/y and zoom level to map URL
+    // https://github.com/mlevans/leaflet-hash
+    var hash = new L.Hash(map); 
+
+    // Add base map (OSM)
+    var osmLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: 'Basemap &copy; <a href="https://www.openstreetmap.org/copyright" target=_blank>OpenStreetMap</a> contributors',
+    });
+
+    // Add base map (Esri world imagery)
+    // Basemap options examined via https://leaflet-extras.github.io/leaflet-providers/preview/
+    var imgLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom: 18,
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP'
+    });
+
+    map.addLayer(imgLayer);   // don't add OSM layer yet, so that satellite appears as default
+    map.fitBounds(map.getBounds());
+
+    // Group and position white circle markers with tooltips at each site
+    // Click handler for map fly-to and scrolling to corresponding text
+    var loc1d = L.marker([43.650945703313894, -79.35809984539931], {color: "#FFFFFF"}).bindTooltip("Distillery District").on("click", function(e){map.flyTo([43.650945703313894, -79.35809984539931], 17); document.getElementById('location1d').scrollIntoView(true);}),
+        loc1g = L.marker([43.6621076705541, -79.37408374283689], {color: "#FFFFFF"}).bindTooltip("Allan Garden Palm House").on("click", function(e){map.flyTo([43.6621076705541, -79.37408374283689], 17); document.getElementById('location1g').scrollIntoView(true);}),
+        loc1j = L.marker([43.660961000477016, -79.4513942633697], {color: "#FFFFFF"}).bindTooltip("The Junction Neighbourhood").on("click", function(e){map.flyTo([43.660961000477016, -79.4513942633697], 17); document.getElementById('location1j').scrollIntoView(true);}),
+        loc1k = L.marker([43.654918040502956, -79.40018060187069], {color: "#FFFFFF"}).bindTooltip("Kensington Market").on("click", function(e){map.flyTo([43.654918040502956, -79.40018060187069], 17); document.getElementById('location1k').scrollIntoView(true);}),
+        loc1n = L.marker([43.652916471966336, -79.38324204044673], {color: "#FFFFFF"}).bindTooltip("Nathan Phillips Square").on("click", function(e){map.flyTo([43.652916471966336, -79.38324204044673], 17); document.getElementById('location1n').scrollIntoView(true);}),
+        loc1o = L.marker([43.65269055906366, -79.38158685579324], {color: "#FFFFFF"}).bindTooltip("Old City Hall, Toronto").on("click", function(e){map.flyTo([43.65269055906366, -79.38158685579324], 17); document.getElementById('location1o').scrollIntoView(true);}),
+        loc2 = L.marker([43.66764759291266, -79.39470200001394], {color: "#FFFFFF"}).bindTooltip("Royal Ontario Museum").on("click", function(e){map.flyTo([43.66764759291266, -79.39470200001394], 17); document.getElementById('location2').scrollIntoView(true);}); 
+        loc3 = L.marker([43.67800604136595, -79.40935807117697], {color: "#FFFFFF"}).bindTooltip("Casa Loma").on("click", function(e){map.flyTo([43.67800604136595, -79.40935807117697], 17); document.getElementById('location3').scrollIntoView(true);}); 
+        loc4 = L.marker([43.652682796349545, -79.38167268658121], {color: "#FFFFFF"}).bindTooltip("Old City Hall").on("click", function(e){map.flyTo([43.652682796349545, -79.38167268658121], 17); document.getElementById('location4').scrollIntoView(true);}); 
+        loc5 = L.marker([43.08885789817081, -70.7496690801711], {color: "#FFFFFF"}).bindTooltip("Museum of Modern Art").on("click", function(e){map.flyTo([43.08885789817081, -70.7496690801711], 17); document.getElementById('location5').scrollIntoView(true);}); 
+        loc6 = L.marker([40.75895960045721, -73.97867360209554], {color: "#FFFFFF"}).bindTooltip("Rockefeller Center").on("click", function(e){map.flyTo([40.75895960045721, -73.97867360209554], 17); document.getElementById('location6').scrollIntoView(true);}); 
+
+    var sites = L.layerGroup([loc1d, loc1g, loc1j, loc1k, loc1n, loc1o, loc2, loc3, loc4, loc5, loc6]); 
+    map.addLayer(sites); 
+
+    // Legend/layer control placed at bottom left of map canvas
+    L.control.layers({"OpenStreetMap": osmLayer, "Esri World Imagery": imgLayer}, {"Sites": sites}, {collapsed: false, sortLayers: true}).setPosition('topleft').addTo(map); 
+
+    // Place zoom control in top left corner, but below legend/layers
+    L.control.zoom({position: 'topleft'}).addTo(map); 
+    L.control.attribution({position: 'bottomleft'}).addTo(map);
+
+    // SCROLLYTELLING FUNCTIONALITY STARTS HERE
+
+    // Set the trigger position to half the viewport height
+    // Important: use mapDiv height, not scrollDiv which extends below window!
+    var viewportHeight = document.getElementById('mapDiv').getBoundingClientRect().height; 
+    var halfViewportHeight = Math.floor(viewportHeight / 2); 
+
+// for testing
+console.log('scroll div height = ' + viewportHeight + ', half of that being ' + halfViewportHeight); 
+
+    // The following code uses the scrollstory library, https://github.com/sjwilliams/scrollstory
+    // ...with code samples from view-source:https://pudding.cool/process/how-to-implement-scrollytelling/demo/scrollstory/
+
+    // instantiate scrollStory using JQuery format
+    $(function(){
+      $("#scrollDiv").scrollStory({
+        contentSelector: '.trigger', 
+        triggerOffset: halfViewportHeight, 
+        itemfocus: function(ev, item) {
+          var centre = L.latLng(item.data.y, item.data.x)
+          var zoom = item.data.z
+
+// for testing
+console.log('trigger on ' + item  + '. Fly to ' + centre + ' at zoom level ' + zoom)
+
+          // Animated map move to new location. 
+          // Finally resolved an issue resulting from the HTML/CSS definition of the divs...
+          map.flyTo(centre, zoom, {
+            animate: true,
+            //duration: 2   // avoid because different travel distances require same speed
+          })
+        }, 
+        keyboard: true,   // allow story navigation using left/right arrow keys
+      })
+    });
+
+  </script>
+
+</body>
+
+</html>
