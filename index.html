@@ -131,7 +131,7 @@
   <div id='scrollDiv'>
 
     <!-- class trigger and data attributes used by ScrollStory -->
-    <div class='trigger' id='location1' data-x='48' data-y='24' data-z='2'>
+    <div class='trigger' id='location1' data-x='-65' data-y='42' data-z='4'>
       
 <p><small><em>Leaflet web map and scrollstory experiment by Drs. Claus Rinner and Ann Marie Murnaghan and collaborators, 
   mapping select locations from children's books (image permissions to be confirmed).</em></small></p><hr>
@@ -149,7 +149,7 @@
       <p>&nbsp;</p>
 
       <!-- within-panel navigation using HTML anchors -->
-      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1"> &wedge; </a>|<a onclick="map.flyTo([24, 48], 2)"> &circlearrowright; </a>|<a href="#location1d"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
+      <p align='right'><a href="#location1"> &barwedge; </a>|<a href="#location1"> &wedge; </a>|<a onclick="map.flyTo([42, -65], 4)"> &circlearrowright; </a>|<a href="#location1d"> &vee; </a>|<a href="#location6"> &veebar; </a></p>
 
       <!-- more space so that viewport is occupied by only one item at a time -->
       <p>&nbsp;</p>
@@ -367,7 +367,7 @@
 
     // Create instance of Leaflet Map
     var map = L.map('mapDiv', {
-      center: [24, 48], 
+      center: [42, -65], 
       attributionControl: false, 
       zoom: 2, 
       zoomControl: false,   // set to false if you want to position the zoom controls elsewhere
